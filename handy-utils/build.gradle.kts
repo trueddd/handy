@@ -1,5 +1,5 @@
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     kotlin("android")
     kotlin("kapt")
     kotlin("android.extensions")
@@ -21,7 +21,6 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
     defaultConfig {
-        applicationId = "com.github.trueddd.handy"
         minSdkVersion(21)
         targetSdkVersion(29)
         versionCode = 1
@@ -37,9 +36,6 @@ android {
 dependencies {
     val kotlinVersion = "1.3.61"
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
-
-    implementation(project(":handy-utils"))
-
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlinVersion")
     implementation("androidx.appcompat:appcompat:1.1.0")
     implementation("androidx.core:core-ktx:1.1.0")
