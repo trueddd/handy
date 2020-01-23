@@ -1,9 +1,22 @@
+import java.net.URI
+
 plugins {
     id("com.android.library")
     kotlin("android")
     kotlin("kapt")
     kotlin("android.extensions")
+    id("com.github.dcendents.android-maven")
 }
+
+repositories {
+    mavenCentral()
+    google()
+    jcenter()
+    maven { url = URI("https://jitpack.io") }
+}
+
+group = "com.github.trueddd"
+version = "0.0.1"
 
 kapt {
     correctErrorTypes = true
