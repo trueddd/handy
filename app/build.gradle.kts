@@ -42,5 +42,6 @@ dependencies {
     implementation(Dependencies.constraintLayout)
     implementation(Dependencies.Lifecycle.extensions)
     implementation(Dependencies.Lifecycle.viewModel)
-    implementation(Dependencies.handy)
+    implementation(project(":handy-utils"))
+    //implementation(Dependencies.handy)
 }
