@@ -13,7 +13,7 @@ object Config {
     const val kotlinVersion = "1.3.61"
 
     object Modules {
-        private const val Root = "com.github.trueddd"
+        const val Root = "com.github.trueddd.handy"
         const val Core = "$Root:core"
         const val DataBinding = "$Root:databinding"
     }

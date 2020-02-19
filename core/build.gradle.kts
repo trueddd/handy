@@ -4,7 +4,7 @@ plugins {
     id("com.github.dcendents.android-maven")
 }
 
-group = Config.Modules.Core
+group = Config.Modules.Root
 version = Config.versionName
 
 android {
