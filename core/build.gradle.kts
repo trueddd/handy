@@ -1,17 +1,11 @@
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     kotlin("android")
-    kotlin("kapt")
-    kotlin("android.extensions")
+    id("com.github.dcendents.android-maven")
 }
 
-kapt {
-    correctErrorTypes = true
-}
-
-androidExtensions {
-    isExperimental = true
-}
+group = Config.Modules.Core
+version = Config.versionName
 
 android {
     buildToolsVersion = Config.buildTools
@@ -21,7 +15,6 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
     defaultConfig {
-        applicationId = Config.appID
         minSdkVersion(Config.VersionsSDK.min)
         targetSdkVersion(Config.VersionsSDK.target)
         versionCode = Config.versionCode
@@ -42,6 +35,4 @@ dependencies {
     implementation(Dependencies.constraintLayout)
     implementation(Dependencies.Lifecycle.extensions)
     implementation(Dependencies.Lifecycle.viewModel)
-    implementation(project(":core"))
-    //implementation(Dependencies.handy)
 }

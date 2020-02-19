@@ -1,2 +1,2 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.github.trueddd.handy_utils" />
+    package="com.github.trueddd.databinding" />

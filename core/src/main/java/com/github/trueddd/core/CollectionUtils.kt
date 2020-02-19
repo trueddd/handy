@@ -1,4 +1,4 @@
-package com.github.trueddd.handy_utils
+package com.github.trueddd.core
 
 inline fun <reified T> Iterable<*>.filterWithType(predicate: (T) -> Boolean): Iterable<T> {
     return this.filterIsInstance<T>().filter(predicate)
