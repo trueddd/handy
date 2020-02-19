@@ -1,4 +1,4 @@
-package com.github.trueddd.handy_utils
+package com.github.trueddd.core
 
 import android.view.View
 

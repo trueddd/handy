@@ -24,5 +24,8 @@ object Dependencies {
     private const val androidMavenGradlePluginVersion = "2.1"
     const val androidMavenGradlePlugin = "com.github.dcendents:android-maven-gradle-plugin:$androidMavenGradlePluginVersion"
 
-    const val handy = "com.github.trueddd:handy:${Config.versionName}"
+    object Handy {
+        const val core = "com.github.trueddd.handy:core:${Config.versionName}"
+        const val databinding = "com.github.trueddd.handy:databinding:${Config.versionName}"
+    }
 }

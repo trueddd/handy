@@ -1,30 +1,11 @@
-import java.net.URI
-
 plugins {
     id("com.android.library")
     kotlin("android")
-    kotlin("kapt")
-    kotlin("android.extensions")
     id("com.github.dcendents.android-maven")
 }
 
-repositories {
-    mavenCentral()
-    google()
-    jcenter()
-    maven { url = URI("https://jitpack.io") }
-}
-
-group = "com.github.trueddd"
-version = "0.0.1"
-
-kapt {
-    correctErrorTypes = true
-}
-
-androidExtensions {
-    isExperimental = true
-}
+group = Config.Modules.Root
+version = Config.versionName
 
 android {
     buildToolsVersion = Config.buildTools
@@ -32,6 +13,9 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
+    }
+    dataBinding {
+        isEnabled = true
     }
     defaultConfig {
         minSdkVersion(Config.VersionsSDK.min)
