@@ -35,4 +35,5 @@ dependencies {
     implementation(Dependencies.constraintLayout)
     implementation(Dependencies.Lifecycle.extensions)
     implementation(Dependencies.Lifecycle.viewModel)
+    implementation(Dependencies.recyclerView)
 }
