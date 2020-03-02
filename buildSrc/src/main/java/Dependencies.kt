@@ -24,6 +24,9 @@ object Dependencies {
     private const val androidMavenGradlePluginVersion = "2.1"
     const val androidMavenGradlePlugin = "com.github.dcendents:android-maven-gradle-plugin:$androidMavenGradlePluginVersion"
 
+    private const val recyclerViewVersion = "1.1.0"
+    const val recyclerView = "androidx.recyclerview:recyclerview:$recyclerViewVersion"
+
     object Handy {
         const val core = "com.github.trueddd.handy:core:${Config.versionName}"
         const val databinding = "com.github.trueddd.handy:databinding:${Config.versionName}"
