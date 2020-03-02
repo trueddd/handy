@@ -15,7 +15,7 @@ abstract class DataBindingFragment<DB: ViewDataBinding> : Fragment() {
 
     @get:LayoutRes protected abstract val layoutRes: Int
 
-    protected open fun afterCreate(savedInstanceState: Bundle?) {}
+    protected open fun afterCreateView(savedInstanceState: Bundle?) {}
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -24,7 +24,7 @@ abstract class DataBindingFragment<DB: ViewDataBinding> : Fragment() {
     ): View? {
         performBinding(inflater, savedInstanceState)
         binding.executePendingBindings()
-        afterCreate(savedInstanceState)
+        afterCreateView(savedInstanceState)
         return binding.root
     }
 

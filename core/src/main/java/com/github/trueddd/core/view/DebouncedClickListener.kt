@@ -27,11 +27,11 @@ class DebouncedClickListener(
     }
 }
 
-fun View.setDebouncedClickListener(debounceDuration: Long, action: (v: View?) -> Unit) {
+fun View.setDebouncedClickListener(debounceDuration: Long = 200L, action: (v: View?) -> Unit) {
     setOnClickListener(DebouncedClickListener(debounceDuration, action))
 }
 
 @RequiresApi(Build.VERSION_CODES.O)
-fun View.setDebouncedClickListener(debounceDuration: Duration, action: (v: View?) -> Unit) {
+fun View.setDebouncedClickListener(debounceDuration: Duration = Duration.ofMillis(200L), action: (v: View?) -> Unit) {
     setOnClickListener(DebouncedClickListener(debounceDuration, action))
 }
