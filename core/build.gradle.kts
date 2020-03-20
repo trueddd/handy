@@ -32,8 +32,5 @@ dependencies {
     implementation(Dependencies.kotlinStdLib)
     implementation(Dependencies.appCompat)
     implementation(Dependencies.coreCompat)
-    implementation(Dependencies.constraintLayout)
-    implementation(Dependencies.Lifecycle.extensions)
-    implementation(Dependencies.Lifecycle.viewModel)
     implementation(Dependencies.recyclerView)
 }
