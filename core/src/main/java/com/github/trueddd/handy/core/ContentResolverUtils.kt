@@ -19,12 +19,24 @@ fun Context.getFileRealPath(uri: Uri): String? {
             }
         } else if (isDownloadsDocument(uri)) {
 
-            val id = DocumentsContract.getDocumentId(uri)
-            val contentUri = ContentUris.withAppendedId(
-                Uri.parse("content://downloads/public_downloads"), java.lang.Long.valueOf(id)
-            )
+            if (isDownloadsDocument(uri)) {
+                val fileName = getFilePath(this, uri)
+                if (fileName != null) {
+                    return Environment.getExternalStorageDirectory().toString() + "/Download/" + fileName
+                }
 
-            return getDataColumn(this, contentUri, null, null)
+                var id = DocumentsContract.getDocumentId(uri)
+                if (id != null && id.startsWith("raw:")) {
+                    id = id.replaceFirst("raw:".toRegex(), "")
+                    if (File(id).exists()) return id
+                }
+
+                val contentUri = ContentUris.withAppendedId(
+                        Uri.parse("content://downloads/public_downloads"), java.lang.Long.valueOf(id)
+                )
+
+                return getDataColumn(this, contentUri, null, null)
+            }
         } else if (isMediaDocument(uri)) {
             val docId = DocumentsContract.getDocumentId(uri)
             val split = docId.split(":".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
@@ -45,6 +57,21 @@ fun Context.getFileRealPath(uri: Uri): String? {
         return if (isGooglePhotosUri(uri)) uri.lastPathSegment else getDataColumn(this, uri, null, null)
     } else if ("file".equals(uri.scheme, ignoreCase = true)) {
         return uri.path
+    }
+    return null
+}
+
+private fun getFilePath(context: Context, uri: Uri?): String? {
+    var cursor: Cursor? = null
+    val projection = arrayOf(MediaStore.MediaColumns.DISPLAY_NAME)
+    try {
+        cursor = context.contentResolver.query(uri!!, projection, null, null, null)
+        if (cursor != null && cursor.moveToFirst()) {
+            val index = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DISPLAY_NAME)
+            return cursor.getString(index)
+        }
+    } finally {
+        cursor?.close()
     }
     return null
 }
