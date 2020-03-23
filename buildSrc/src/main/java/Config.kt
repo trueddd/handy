@@ -1,7 +1,7 @@
 object Config {
     const val appID = "com.github.trueddd.handy"
-    const val versionCode = 10
-    const val versionName = "0.1.0"
+    const val versionCode = 11
+    const val versionName = "0.1.1"
 
     const val buildTools = "29.0.1"
     object VersionsSDK {
