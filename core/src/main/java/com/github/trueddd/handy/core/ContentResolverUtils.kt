@@ -18,25 +18,22 @@ fun Context.getFileRealPath(uri: Uri): String? {
                 return getExternalFilesDir(null)?.toString()?.plus("/${split[1]}")
             }
         } else if (isDownloadsDocument(uri)) {
-
-            if (isDownloadsDocument(uri)) {
-                val fileName = getFilePath(this, uri)
-                if (fileName != null) {
-                    return Environment.getExternalStorageDirectory().toString() + "/Download/" + fileName
-                }
-
-                var id = DocumentsContract.getDocumentId(uri)
-                if (id != null && id.startsWith("raw:")) {
-                    id = id.replaceFirst("raw:".toRegex(), "")
-                    if (File(id).exists()) return id
-                }
-
-                val contentUri = ContentUris.withAppendedId(
-                        Uri.parse("content://downloads/public_downloads"), java.lang.Long.valueOf(id)
-                )
-
-                return getDataColumn(this, contentUri, null, null)
+            val fileName = getFilePath(this, uri)
+            if (fileName != null) {
+                return Environment.getExternalStorageDirectory().toString() + "/Download/" + fileName
             }
+
+            var id = DocumentsContract.getDocumentId(uri)
+            if (id != null && id.startsWith("raw:")) {
+                id = id.replaceFirst("raw:".toRegex(), "")
+                if (File(id).exists()) return id
+            }
+
+            val contentUri = ContentUris.withAppendedId(
+                Uri.parse("content://downloads/public_downloads"), java.lang.Long.valueOf(id)
+            )
+
+            return getDataColumn(this, contentUri, null, null)
         } else if (isMediaDocument(uri)) {
             val docId = DocumentsContract.getDocumentId(uri)
             val split = docId.split(":".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()
