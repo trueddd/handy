@@ -8,7 +8,42 @@ import android.os.Environment
 import android.provider.DocumentsContract
 import android.provider.MediaStore
 import java.io.File
+import java.io.InputStream
 
+fun Context.getFileInputStreamByUri(uri: Uri): InputStream? {
+    return contentResolver?.openInputStream(uri)
+}
+
+/**
+ * Returns temporary file with content of file with given [uri].
+ * Be careful with this function on returning large files, because
+ * this function returns NEW temporary file.
+ */
+fun Context.getFileByUri(uri: Uri): File? {
+    val tempFile = File.createTempFile("temp_${this.hashCode()}_${uri.hashCode()}", null)
+    return tempFile.also {
+        getFileInputStreamByUri(uri)?.toFile(it)
+    }
+}
+
+/**
+ * Copies given [InputStream] to [target] file
+ */
+fun InputStream.toFile(target: File) {
+    target.outputStream().use {
+        this.copyTo(it)
+    }
+}
+
+fun Context.getFileAbsolutePath(uri: Uri): String? {
+    return getFileByUri(uri)?.absolutePath
+}
+
+@Deprecated(
+        level = DeprecationLevel.WARNING,
+        message = "This function may return null or empty file on some devices",
+        replaceWith = ReplaceWith("getFileAbsolutePath(uri)", "com.github.trueddd.handy.core.getFileAbsolutePath")
+        )
 fun Context.getFileRealPath(uri: Uri): String? {
     if (DocumentsContract.isDocumentUri(this, uri)) {
         if (isExternalStorageDocument(uri)) {
